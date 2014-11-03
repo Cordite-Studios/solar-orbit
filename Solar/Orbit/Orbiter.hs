@@ -36,23 +36,23 @@ getTime = liftF $ GetTime id
 
 -- | Checks to see if a log, by name, currently exists in the append-only
 -- log system
-logExists :: OMF s d t c m => OrbiterName -> m Bool
+logExists :: OMF s d t c m => OrbiterLogName -> m Bool
 logExists name = liftF $ LogExists name id
 
 -- | Operation to delete a log. Will return True on successful deletion
-logDelete :: OMF s d t c m => OrbiterName -> m Bool
+logDelete :: OMF s d t c m => OrbiterLogName -> m Bool
 logDelete name = liftF $ LogDelete name id
 
 -- | Gives the log's current position in case to reference it elsewhere
-tellLogPosition :: OMF s d t c m => OrbiterName -> m Int64
+tellLogPosition :: OMF s d t c m => OrbiterLogName -> m Int64
 tellLogPosition name = liftF $ TellLogPosition name id
 
 -- | Gives the count of bytes from beginning to end of the log by name
-tellLogSize :: OMF s d t c m => OrbiterName -> m Int64
+tellLogSize :: OMF s d t c m => OrbiterLogName -> m Int64
 tellLogSize name = liftF $ TellLogSize name id
 
 -- | Gives a checksum as calculated by the runner
-checkSumLog :: OMF s d t c m => OrbiterName -> m B.ByteString
+checkSumLog :: OMF s d t c m => OrbiterLogName -> m B.ByteString
 checkSumLog name = liftF $ CheckSumLog name id
 
 -- | Attempts to read a Serializeable data type from the log.
@@ -60,26 +60,26 @@ checkSumLog name = liftF $ CheckSumLog name id
 -- A failure will always occur if the log does not have enough
 -- bytes for what is trying to be read, or if there are zero bytes
 -- left to process.
-readFromLog :: OMFS s d t c a m => OrbiterName -> m (OrbitTry a)
+readFromLog :: OMFS s d t c a m => OrbiterLogName -> m (OrbitTry a)
 readFromLog name = liftF $ ReadFromLog name id
 
 -- | Atomically renames the log by name to another name.
-renameLog :: OMF s d t c m => OrbiterName -> OrbiterName -> m ReplaceStatus
+renameLog :: OMF s d t c m => OrbiterLogName -> OrbiterLogName -> m ReplaceStatus
 renameLog name name' = liftF $ RenameLog name name' id
 
 -- | Atomically appends a Serializeable data type to a log.
 -- The read position does not affect where we write.
 -- The read position is not affected.
-appendLogData :: OMFS s d t c a m => OrbiterName -> a -> m ()
+appendLogData :: OMFS s d t c a m => OrbiterLogName -> a -> m ()
 appendLogData name content = liftF $ AppendLogData name content ()
 
 -- | Seeks the log back to the start
-resetLogPosition :: OMF s d t c m => OrbiterName -> m ()
+resetLogPosition :: OMF s d t c m => OrbiterLogName -> m ()
 resetLogPosition name = liftF $ ResetLogPosition name ()
 
 -- | Seeks the log ahead by the byte count.
 -- If we hit the end, we silently stay at the end.
-seekLogAhead :: OMF s d t c m => OrbiterName -> Int -> m ()
+seekLogAhead :: OMF s d t c m => OrbiterLogName -> Int -> m ()
 seekLogAhead name jump = liftF $ SeekLogAhead name jump ()
 
 -- | A blocking operation that recieves a typed message.

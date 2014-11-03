@@ -22,49 +22,49 @@ data OrbiterF sys dest time context next where
 
   -- File System
   -- - Returns
-  LogExists   :: OrbiterName
+  LogExists   :: OrbiterLogName
               -> (Bool -> next)
               -> OrbiterF sys dest time context next
 
-  LogDelete   :: OrbiterName
+  LogDelete   :: OrbiterLogName
               -> (Bool -> next)
               -> OrbiterF sys dest time context next
 
-  TellLogPosition :: OrbiterName
+  TellLogPosition :: OrbiterLogName
                   -> (Int64 -> next)
                   -> OrbiterF sys dest time context next
 
-  TellLogSize :: OrbiterName
+  TellLogSize :: OrbiterLogName
               -> (Int64 -> next)
               -> OrbiterF sys dest time context next
 
-  CheckSumLog :: OrbiterName
+  CheckSumLog :: OrbiterLogName
               -> (B.ByteString -> next)
               -> OrbiterF sys dest time context next
 
   -- - Returns and has an effect
   ReadFromLog :: (S.Serialize a)
-              => OrbiterName
+              => OrbiterLogName
               -> (OrbitTry a -> next)
               -> OrbiterF sys dest time context next
 
-  RenameLog   :: OrbiterName
-              -> OrbiterName
+  RenameLog   :: OrbiterLogName
+              -> OrbiterLogName
               -> (ReplaceStatus -> next)
               -> OrbiterF sys dest time context next
 
   -- - Effect only
   AppendLogData   :: (S.Serialize a)
-                  => OrbiterName
+                  => OrbiterLogName
                   -> a
                   -> next
                   -> OrbiterF sys dest time context next
 
-  ResetLogPosition:: OrbiterName
+  ResetLogPosition:: OrbiterLogName
                   -> next
                   -> OrbiterF sys dest time context next
 
-  SeekLogAhead    :: OrbiterName
+  SeekLogAhead    :: OrbiterLogName
                   -> Int
                   -> next
                   -> OrbiterF sys dest time context next

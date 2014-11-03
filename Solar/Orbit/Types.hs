@@ -10,8 +10,11 @@ import qualified  Data.ByteString as B
 import            Data.Typeable
 import            Data.Generics
 
+-- | Alias for textual types
+type OrbiterText = T.Text
+
 -- | Name for a log or human readable identifier
-type OrbiterName = T.Text
+type OrbiterLogName = T.Text
 
 -- | Prority of a log, in case the runner filters
 data Priority
@@ -33,7 +36,7 @@ data OrbiterClimate a
   deriving (Show, Eq, Typeable, Data)
 
 -- | Climate for names
-type OrbiterCName = OrbiterClimate OrbiterName
+type OrbiterCName = OrbiterClimate OrbiterText
 -- | Climates for binary keys
 type OrbiterCBinary = OrbiterClimate B.ByteString
 
@@ -61,7 +64,7 @@ data Message sys dest a = Message
   }
   deriving (Show, Typeable, Data)
 
--- | Describes what happened when trying to rename a log
+-- | Describes what happened when trying to rename a log.
 data ReplaceStatus
   = RenameSuccess
   | ReplaceSuccess

@@ -16,7 +16,7 @@ import            Solar.Orbit.Types
 -- | Contexts may provide a hint of the hierarchy
 -- that this 'Orbiter' is in.
 data OrbiterContext = OrbiterContext
-  { logicalHierarchy  :: M.Map OrbiterName OrbiterClimates
+  { logicalHierarchy  :: M.Map OrbiterText OrbiterClimates
   -- ^ Chain of identiifers that can be used to possibly communicate to other
   -- Orbiters logically.
   , assignedPosition  :: OrbiterClimate B.ByteString
