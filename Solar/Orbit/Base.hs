@@ -9,20 +9,6 @@ import            Data.Word
 import            Data.Int
 import            Data.Typeable
 import            Data.Generics
-import qualified  Data.Map as M
-import qualified  Data.ByteString as B
-import            Solar.Orbit.Types
-
--- | Contexts may provide a hint of the hierarchy
--- that this 'Orbiter' is in.
-data OrbiterContext = OrbiterContext
-  { logicalHierarchy  :: M.Map OrbiterText OrbiterClimates
-  -- ^ Chain of identiifers that can be used to possibly communicate to other
-  -- Orbiters logically.
-  , assignedPosition  :: OrbiterClimate B.ByteString
-  -- ^ A binary-identifier that may determine where this Orbiter is or
-  -- what this Orbiter owns
-  }
 
 -- | Genericized time data structure, in case you do not use
 -- a direct method like year, day, hours, minutes or such.

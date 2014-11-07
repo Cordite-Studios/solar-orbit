@@ -6,7 +6,6 @@ module Solar.Orbit.Types where
 
 import qualified  Data.Text as T
 import qualified  Data.Sequence as S
-import qualified  Data.ByteString as B
 import            Data.Typeable
 import            Data.Generics
 
@@ -27,24 +26,6 @@ data Priority
   | Alert
   | Emergency
   deriving (Show, Eq, Enum, Typeable, Data)
-
--- | an ADT for most configurations (1,2,n)
-data OrbiterClimate a
-  = OrbiterChain (S.Seq a)
-  | OrbiterSingle a
-  | OrbiterPair a a
-  deriving (Show, Eq, Typeable, Data)
-
--- | Climate for names
-type OrbiterCName = OrbiterClimate OrbiterText
--- | Climates for binary keys
-type OrbiterCBinary = OrbiterClimate B.ByteString
-
--- | Similar to Either, but not with Left being considered negative
-data OrbiterClimates
-  = OrbitNamed OrbiterCName
-  | OrbitBinary OrbiterCBinary
-  deriving (Show, Eq, Typeable, Data)
 
 -- | Shortcut for what 'S.Serialize' has when parsing
 -- Only to be used when reading from a log, not when getting
