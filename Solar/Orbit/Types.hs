@@ -5,7 +5,6 @@
 module Solar.Orbit.Types where
 
 import qualified  Data.Text as T
-import qualified  Data.Sequence as S
 import            Data.Typeable
 import            Data.Generics
 
